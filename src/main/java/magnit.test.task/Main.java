@@ -9,9 +9,9 @@ public class Main {
         long start = System.currentTimeMillis();
 
         Service service = new Service();
-        service.setURL("jdbc:postgresql://localhost:5432/magnit");
-        service.setUserName("postgres");
-        service.setPassword("postgres");
+        service.setURL("jdbc:sqlite:magnit.db");
+        service.setUserName("user");
+        service.setPassword("pass");
         service.setNum((1000000));
 
         // -----указываем путь где будет созданы наши XML файл

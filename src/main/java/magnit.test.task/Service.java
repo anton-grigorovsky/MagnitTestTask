@@ -69,6 +69,8 @@ public class Service {
                 rootElement.appendChild(child1);
             }
 
+            resultSet.close();
+
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -102,9 +104,10 @@ public class Service {
             statement.executeBatch();
             statement.clearBatch();
             connection.close();
+            statement.close();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Проблемы с подключением к БД.");
         }
 
     }
@@ -117,8 +120,12 @@ public class Service {
             Statement statement = connection.createStatement();
             data = statement.executeQuery("SELECT * FROM test");
 
+            connection.close();
+            statement.close();
+
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Проблема с подключением к БД");
         }
 
         return data;
@@ -132,7 +139,7 @@ public class Service {
 
         }
         catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Невозможно трансформировать XML файл.");;
         }
 
         }
@@ -148,7 +155,7 @@ public class Service {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Невозможно спарсить документ.");
         }
 
         return sum;

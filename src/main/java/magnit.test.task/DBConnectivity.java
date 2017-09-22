@@ -24,17 +24,24 @@ public class DBConnectivity {
         this.password = password;
     }
 
-    public Connection getConnection() throws SQLException{
+    public Connection getConnection() {
 
         Connection connection = null;
         try {
-            Driver driver = (Driver)Class.forName("org.postgresql.Driver").newInstance();
+            Driver driver = (Driver)Class.forName("org.sqlite.JDBC").newInstance();
             DriverManager.registerDriver(driver);
             connection = DriverManager.getConnection(URL, userName, password);
         }
-        catch (Exception e ) {}
+        catch (SQLException e ) {
+            System.out.println("Ошибка подключения к БД.");
+        }
+        catch (Exception e) {
+            System.out.println("Проблема подключения драйвера.");
+        }
 
-    return connection;
+
+
+        return connection;
 
 }
 
